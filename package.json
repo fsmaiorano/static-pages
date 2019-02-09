@@ -6,7 +6,7 @@
   "repository": "https://github.com/fsmaiorano/static-pages-boilerplate",
   "scripts": {
     "build": "npm-run-all clean build:typescript build:css copy:html copy:js copy:css",
-    "build:prod": "npm-run-all clean build:typescript:production build:css:production copy:html copy:js copy:css",
+    "build:prod": "npm-run-all clean build:typescript:production build:css:production copy:html copy:js copy:css vendors:prefix:css",
     "start": "npm-run-all --parallel devserver watch:sass watch:typescript",
     "watch:sass": "node-sass sass/main.scss public/assets/css/style.css -w",
     "devserver": "live-server --open=public/index.html",
@@ -23,7 +23,9 @@
     "copy:css": "copyfiles --all ./css ./public/css",
     "clean": "npm-run-all clean:css clean:js",
     "clean:css": "rimraf public/assets/css",
-    "clean:js": "rimraf public/assets/js"
+    "clean:js": "rimraf public/assets/js",
+    "vendors:prefix:css": "postcss public/assets/vendors/css/*.css -u autoprefixer -d public/assets/vendors/css",
+    "vendors:compress:css": "node-sass public/assets/vendors/css/*.css -d public/assets/vendors/css --output-style compressed"
   },
   "author": "Fábio Santini Maiorano",
   "license": "ISC",
@@ -38,5 +40,8 @@
     "postcss-cli": "^4.1.1",
     "rimraf": "^2.6.3",
     "typescript": "^3.3.1"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1"
   }
 }
