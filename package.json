@@ -5,8 +5,8 @@
   "main": "index.js",
   "repository": "https://github.com/fsmaiorano/static-pages-boilerplate",
   "scripts": {
-    "build": "npm-run-all build:typescript build:css copy:html copy:js copy:css copy:assets",
-    "build:prod": "npm-run-all build:typescript:production build:css:production copy:html copy:js copy:css copy:assets",
+    "build": "npm-run-all clean build:typescript build:css copy:html copy:js copy:css",
+    "build:prod": "npm-run-all clean build:typescript:production build:css:production copy:html copy:js copy:css",
     "start": "npm-run-all --parallel devserver watch:sass watch:typescript",
     "watch:sass": "node-sass sass/main.scss public/assets/css/style.css -w",
     "devserver": "live-server --open=public/index.html",
@@ -21,7 +21,9 @@
     "copy:html": "copyfiles ./index.html ./ ./public",
     "copy:js": "copyfiles --all ./typescript ./public/js",
     "copy:css": "copyfiles --all ./css ./public/css",
-    "copy:assets": "copyfiles --all ./assets ./public/assets"
+    "clean": "npm-run-all clean:css clean:js",
+    "clean:css": "rimraf public/assets/css",
+    "clean:js": "rimraf public/assets/js"
   },
   "author": "Fábio Santini Maiorano",
   "license": "ISC",
@@ -34,6 +36,7 @@
     "npm-run-all": "^4.1.1",
     "postcss": "^7.0.14",
     "postcss-cli": "^4.1.1",
+    "rimraf": "^2.6.3",
     "typescript": "^3.3.1"
   }
 }
