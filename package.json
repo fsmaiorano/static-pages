@@ -41,7 +41,5 @@
     "rimraf": "^2.6.3",
     "typescript": "^3.3.1"
   },
-  "dependencies": {
-    "jquery": "^3.3.1"
-  }
+  "dependencies": {}
 }
